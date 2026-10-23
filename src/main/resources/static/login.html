@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in · VAULT</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/auth.css">
+  <script type="module" src="/js/auth.js"></script>
+</head>
+<body data-page="login">
+  <div class="auth-layout">
+    <aside class="auth-aside">
+      <a class="brand" href="/" aria-label="VAULT home">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock-keyhole"/></svg></span>
+        VAULT
+      </a>
+      <div>
+        <h2>Welcome back to your vault.</h2>
+        <p>Your browser derives your keys locally, proves your identity to the server, then decrypts your vault on this device.</p>
+      </div>
+      <ul class="auth-points">
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock"/></svg><span>Your master password is never sent to the server.</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-clock"/></svg><span>Your vault locks after 15 minutes of inactivity.</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-shield-check"/></svg><span>Repeated failed attempts are temporarily blocked.</span></li>
+      </ul>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-card">
+        <a class="brand auth-mobile-brand" href="/" aria-label="VAULT home">
+          <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock-keyhole"/></svg></span>
+          VAULT
+        </a>
+        <header class="auth-card-header">
+          <h1>Log in</h1>
+          <p>Enter your email and master password to unlock your vault.</p>
+        </header>
+
+        <div class="alert alert-info" id="form-notice" role="status" hidden></div>
+        <div class="alert alert-error" id="form-error" role="alert" hidden></div>
+
+        <form class="auth-form" id="login-form" novalidate>
+          <div class="field">
+            <label class="field-label" for="email">Email</label>
+            <input class="input" id="email" name="email" type="email" autocomplete="username" maxlength="254" required aria-describedby="email-error" autofocus>
+            <span class="field-error" id="email-error"></span>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="password">Master password</label>
+            <div class="input-group">
+              <input class="input" id="password" name="password" type="password" autocomplete="current-password" maxlength="128" required aria-describedby="password-error">
+              <div class="input-group-actions">
+                <button class="icon-btn" type="button" id="toggle-password"></button>
+              </div>
+            </div>
+            <span class="field-error" id="password-error"></span>
+          </div>
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">Log in</button>
+          <p class="auth-progress" id="progress" aria-live="polite"></p>
+        </form>
+
+        <p class="auth-footer">New to VAULT? <a href="/register.html">Create a vault</a></p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

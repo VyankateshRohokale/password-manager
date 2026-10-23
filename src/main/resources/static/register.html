@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create your vault · VAULT</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/auth.css">
+  <script type="module" src="/js/auth.js"></script>
+</head>
+<body data-page="register">
+  <div class="auth-layout">
+    <aside class="auth-aside">
+      <a class="brand" href="/" aria-label="VAULT home">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock-keyhole"/></svg></span>
+        VAULT
+      </a>
+      <div>
+        <h2>One strong password protects all the others.</h2>
+        <p>Your master password never leaves this browser. It is used to derive the keys that lock and unlock your vault.</p>
+      </div>
+      <ul class="auth-points">
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-key-round"/></svg><span>Use a long passphrase of four or more random words, or at least 12 mixed characters.</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-fingerprint"/></svg><span>Don't reuse a password you use anywhere else.</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-triangle-alert"/></svg><span>It cannot be reset or recovered. Store a backup somewhere safe and offline.</span></li>
+      </ul>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-card">
+        <a class="brand auth-mobile-brand" href="/" aria-label="VAULT home">
+          <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock-keyhole"/></svg></span>
+          VAULT
+        </a>
+        <header class="auth-card-header">
+          <h1>Create your vault</h1>
+          <p>It takes a few seconds. Encryption keys are generated in your browser.</p>
+        </header>
+
+        <div class="alert alert-error" id="form-error" role="alert" hidden></div>
+
+        <form class="auth-form" id="register-form" novalidate>
+          <div class="field">
+            <label class="field-label" for="email">Email</label>
+            <input class="input" id="email" name="email" type="email" autocomplete="email" maxlength="254" required aria-describedby="email-error" autofocus>
+            <span class="field-error" id="email-error"></span>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="password">Master password</label>
+            <div class="input-group">
+              <input class="input" id="password" name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required aria-describedby="password-hint password-error">
+              <div class="input-group-actions">
+                <button class="icon-btn" type="button" id="toggle-password"></button>
+              </div>
+            </div>
+            <div class="strength" id="password-strength" data-score="0" aria-live="polite">
+              <div class="strength-bars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+              <div class="strength-text">
+                <span>Strength: <span class="strength-label">—</span></span>
+                <span class="strength-hint"></span>
+              </div>
+            </div>
+            <span class="field-hint" id="password-hint">At least 12 characters and a strength of “Fair” or better.</span>
+            <span class="field-error" id="password-error"></span>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="confirm">Confirm master password</label>
+            <div class="input-group">
+              <input class="input" id="confirm" name="confirm" type="password" autocomplete="new-password" maxlength="128" required aria-describedby="confirm-error">
+              <div class="input-group-actions">
+                <button class="icon-btn" type="button" id="toggle-confirm"></button>
+              </div>
+            </div>
+            <span class="field-error" id="confirm-error"></span>
+          </div>
+
+          <div class="field">
+            <label class="checkbox">
+              <input type="checkbox" id="acknowledge" required aria-describedby="acknowledge-error">
+              <span>I understand my master password cannot be recovered.</span>
+            </label>
+            <span class="field-error" id="acknowledge-error"></span>
+          </div>
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">Create vault</button>
+          <p class="auth-progress" id="progress" aria-live="polite"></p>
+        </form>
+
+        <p class="auth-footer">Already have a vault? <a href="/login.html">Log in</a></p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

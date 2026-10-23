@@ -1,0 +1,13 @@
+{
+  "name": "vault-web-frontend-tests",
+  "private": true,
+  "type": "module",
+  "description": "Unit tests for VAULT's browser modules, run with Node's built-in test runner and Web Crypto.",
+  "scripts": {
+    "test": "node --test src/test/js/",
+    "vectors": "node src/test/js/generate-vectors.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

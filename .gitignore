@@ -1,0 +1,10 @@
+target/
+.env
+*.log
+.DS_Store
+.idea/
+*.iml
+.vscode/
+node_modules/
+*.p12
+*.jks

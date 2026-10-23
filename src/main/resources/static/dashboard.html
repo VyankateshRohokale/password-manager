@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your vault · VAULT</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <script type="module" src="/js/dashboard.js"></script>
+</head>
+<body data-page="dashboard">
+  <div class="boot-screen" id="boot-screen" role="status">
+    <span class="spinner spinner-lg" aria-hidden="true"></span>
+    <p id="boot-message">Loading your vault…</p>
+  </div>
+
+  <main class="lock-screen" id="lock-screen" hidden>
+    <div class="lock-card">
+      <a class="brand" href="/" aria-label="VAULT home">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock-keyhole"/></svg></span>
+        VAULT
+      </a>
+      <div class="lock-icon"><svg class="icon icon-xl" aria-hidden="true"><use href="/assets/icons.svg#i-lock"/></svg></div>
+      <div class="lock-copy">
+        <h1>Your vault is locked</h1>
+        <p>Signed in as <strong id="lock-email"></strong>. Enter your master password to decrypt your vault on this device.</p>
+      </div>
+      <div class="alert alert-info" id="lock-notice" role="status" hidden></div>
+      <form class="auth-form" id="unlock-form" novalidate>
+        <div class="field">
+          <label class="field-label" for="unlock-password">Master password</label>
+          <div class="input-group">
+            <input class="input" id="unlock-password" type="password" autocomplete="current-password" maxlength="128" required aria-describedby="unlock-password-error">
+            <div class="input-group-actions">
+              <button class="icon-btn" type="button" id="unlock-toggle"></button>
+            </div>
+          </div>
+          <span class="field-error" id="unlock-password-error"></span>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="unlock-submit">Unlock vault</button>
+      </form>
+      <button class="btn btn-ghost btn-block" type="button" id="lock-logout">Log out instead</button>
+    </div>
+  </main>
+
+  <div class="app-shell" id="app" hidden>
+    <aside class="sidebar" id="sidebar" aria-label="Vault navigation">
+      <a class="brand sidebar-brand" href="/dashboard.html#dashboard" aria-label="VAULT dashboard">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock-keyhole"/></svg></span>
+        VAULT
+      </a>
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="#dashboard" data-view-link="dashboard">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-layout-dashboard"/></svg><span>Dashboard</span>
+        </a>
+        <a class="nav-link" href="#passwords" data-view-link="passwords">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-key-round"/></svg><span>All Passwords</span>
+          <span class="nav-count" id="nav-count-all">0</span>
+        </a>
+        <a class="nav-link" href="#favorites" data-view-link="favorites">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-star"/></svg><span>Favorites</span>
+          <span class="nav-count" id="nav-count-favorites">0</span>
+        </a>
+        <a class="nav-link" href="#security" data-view-link="security">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-shield-check"/></svg><span>Security Overview</span>
+          <span class="nav-count nav-count-warning" id="nav-count-attention" hidden>0</span>
+        </a>
+        <a class="nav-link" href="#settings" data-view-link="settings">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-settings"/></svg><span>Settings</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="nav-link" type="button" data-action="lock">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock"/></svg><span>Lock vault</span>
+        </button>
+        <button class="nav-link" type="button" data-action="logout">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-log-out"/></svg><span>Log out</span>
+        </button>
+      </div>
+    </aside>
+    <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-toggle" type="button" id="menu-toggle" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-menu"/></svg>
+        </button>
+        <div class="topbar-title">
+          <h1 id="view-title">Dashboard</h1>
+          <p id="welcome-message"></p>
+        </div>
+        <div class="search">
+          <svg class="icon search-icon" aria-hidden="true"><use href="/assets/icons.svg#i-search"/></svg>
+          <label class="sr-only" for="search">Search your vault</label>
+          <input class="input" id="search" type="search" placeholder="Search your vault" autocomplete="off" spellcheck="false">
+          <kbd class="search-kbd" aria-hidden="true">/</kbd>
+        </div>
+        <button class="btn btn-primary" type="button" data-action="add">
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-plus"/></svg><span class="hide-sm">Add password</span>
+        </button>
+        <div class="profile">
+          <button class="profile-button" type="button" id="profile-button" aria-haspopup="menu" aria-expanded="false" aria-controls="profile-menu">
+            <span class="avatar" id="profile-avatar" aria-hidden="true"></span>
+            <span class="sr-only">Account menu</span>
+            <svg class="icon icon-sm hide-sm" aria-hidden="true"><use href="/assets/icons.svg#i-chevron-down"/></svg>
+          </button>
+          <div class="profile-menu" id="profile-menu" role="menu" hidden>
+            <div class="profile-menu-header">
+              <span class="profile-menu-label">Signed in as</span>
+              <span class="profile-menu-email" id="profile-email"></span>
+            </div>
+            <a class="menu-item" role="menuitem" href="#settings"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-settings"/></svg>Settings</a>
+            <button class="menu-item" role="menuitem" type="button" data-action="lock"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock"/></svg>Lock vault</button>
+            <button class="menu-item is-danger" role="menuitem" type="button" data-action="logout"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-log-out"/></svg>Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content" id="content" tabindex="-1">
+        <section class="view" data-view="dashboard" aria-labelledby="view-title">
+          <div class="stats-grid">
+            <article class="stat-card">
+              <span class="stat-icon stat-icon-accent"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-key-round"/></svg></span>
+              <div><p class="stat-label">Saved credentials</p><p class="stat-value" id="stat-total">—</p></div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon stat-icon-warning"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-star"/></svg></span>
+              <div><p class="stat-label">Favorites</p><p class="stat-value" id="stat-favorites">—</p></div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon stat-icon-danger"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-shield-alert"/></svg></span>
+              <div><p class="stat-label">Need attention</p><p class="stat-value" id="stat-attention">—</p></div>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon stat-icon-success"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-shield-check"/></svg></span>
+              <div><p class="stat-label">Vault health</p><p class="stat-value" id="stat-health">—</p></div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel" aria-labelledby="recent-title">
+              <header class="panel-header">
+                <h2 id="recent-title">Recently updated</h2>
+                <a class="btn btn-ghost btn-sm" href="#passwords">View all <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/icons.svg#i-arrow-right"/></svg></a>
+              </header>
+              <div id="recent-list" class="recent-list"></div>
+            </section>
+            <section class="panel" aria-labelledby="glance-title">
+              <header class="panel-header">
+                <h2 id="glance-title">Security at a glance</h2>
+                <a class="btn btn-ghost btn-sm" href="#security">Details <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/icons.svg#i-arrow-right"/></svg></a>
+              </header>
+              <div id="glance" class="glance"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" data-view="passwords" aria-labelledby="view-title" hidden>
+          <div class="toolbar">
+            <div class="chip-group" role="group" aria-label="Filter credentials" id="filter-group">
+              <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="chip" type="button" data-filter="favorites" aria-pressed="false">Favorites</button>
+              <button class="chip" type="button" data-filter="attention" aria-pressed="false">Needs attention</button>
+              <button class="chip" type="button" data-filter="with-website" aria-pressed="false">With website</button>
+            </div>
+            <div class="toolbar-right">
+              <label class="sr-only" for="sort">Sort credentials</label>
+              <select class="select select-sm" id="sort">
+                <option value="updated-desc">Recently updated</option>
+                <option value="created-desc">Recently added</option>
+                <option value="name-asc">Name (A–Z)</option>
+                <option value="name-desc">Name (Z–A)</option>
+                <option value="password-age">Oldest password first</option>
+              </select>
+              <div class="segmented" role="group" aria-label="Layout">
+                <button class="icon-btn" type="button" data-layout="grid" aria-pressed="true" aria-label="Grid view"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-layout-grid"/></svg></button>
+                <button class="icon-btn" type="button" data-layout="table" aria-pressed="false" aria-label="Table view"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-table-2"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <p class="result-count" id="result-count" aria-live="polite"></p>
+          <div id="credential-container"></div>
+        </section>
+
+        <section class="view" data-view="security" aria-labelledby="view-title" hidden>
+          <div id="security-content"></div>
+        </section>
+
+        <section class="view" data-view="settings" aria-labelledby="view-title" hidden>
+          <div class="settings-grid">
+            <section class="panel" aria-labelledby="account-title">
+              <header class="panel-header"><h2 id="account-title">Account</h2></header>
+              <dl class="detail-list">
+                <div><dt>Email</dt><dd id="account-email"></dd></div>
+                <div><dt>Member since</dt><dd id="account-created"></dd></div>
+                <div><dt>Master password last changed</dt><dd id="account-updated"></dd></div>
+              </dl>
+            </section>
+
+            <section class="panel" aria-labelledby="encryption-title">
+              <header class="panel-header"><h2 id="encryption-title">Encryption</h2></header>
+              <dl class="detail-list">
+                <div><dt>Key derivation</dt><dd id="encryption-kdf"></dd></div>
+                <div><dt>Iterations</dt><dd id="encryption-iterations"></dd></div>
+                <div><dt>Vault cipher</dt><dd>AES-256-GCM, 96-bit random nonce per field</dd></div>
+                <div><dt>Where encryption happens</dt><dd>In this browser (Web Crypto API)</dd></div>
+              </dl>
+            </section>
+
+            <section class="panel panel-wide" aria-labelledby="change-title">
+              <header class="panel-header">
+                <div>
+                  <h2 id="change-title">Change master password</h2>
+                  <p class="panel-subtitle">Your vault key is re-wrapped with keys from the new password. Saved items do not need to be re-encrypted. Other sessions are signed out.</p>
+                </div>
+              </header>
+              <form class="settings-form" id="change-password-form" novalidate>
+                <div class="field">
+                  <label class="field-label" for="cp-current">Current master password</label>
+                  <div class="input-group">
+                    <input class="input" id="cp-current" type="password" autocomplete="current-password" maxlength="128" required aria-describedby="cp-current-error">
+                    <div class="input-group-actions"><button class="icon-btn" type="button" id="cp-current-toggle"></button></div>
+                  </div>
+                  <span class="field-error" id="cp-current-error"></span>
+                </div>
+                <div class="field">
+                  <label class="field-label" for="cp-new">New master password</label>
+                  <div class="input-group">
+                    <input class="input" id="cp-new" type="password" autocomplete="new-password" maxlength="128" required aria-describedby="cp-new-error">
+                    <div class="input-group-actions"><button class="icon-btn" type="button" id="cp-new-toggle"></button></div>
+                  </div>
+                  <div class="strength" id="cp-strength" data-score="0" aria-live="polite">
+                    <div class="strength-bars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                    <div class="strength-text"><span>Strength: <span class="strength-label">—</span></span><span class="strength-hint"></span></div>
+                  </div>
+                  <span class="field-error" id="cp-new-error"></span>
+                </div>
+                <div class="field">
+                  <label class="field-label" for="cp-confirm">Confirm new master password</label>
+                  <input class="input" id="cp-confirm" type="password" autocomplete="new-password" maxlength="128" required aria-describedby="cp-confirm-error">
+                  <span class="field-error" id="cp-confirm-error"></span>
+                </div>
+                <div class="settings-form-actions">
+                  <button class="btn btn-primary" type="submit" id="cp-submit">Change master password</button>
+                </div>
+              </form>
+            </section>
+
+            <section class="panel" aria-labelledby="session-title">
+              <header class="panel-header"><h2 id="session-title">Session</h2></header>
+              <dl class="detail-list">
+                <div><dt>Signed in</dt><dd id="session-created">—</dd></div>
+                <div><dt>Last activity</dt><dd id="session-last">—</dd></div>
+                <div><dt>Server session timeout</dt><dd id="session-timeout">—</dd></div>
+                <div><dt>Vault auto-lock</dt><dd id="session-autolock">—</dd></div>
+                <div><dt>Active sessions</dt><dd id="session-count">—</dd></div>
+              </dl>
+              <div class="panel-actions">
+                <button class="btn btn-secondary btn-sm" type="button" id="revoke-sessions">Sign out other sessions</button>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="signout-title">
+              <header class="panel-header"><h2 id="signout-title">Sign out</h2></header>
+              <p class="panel-text">Locking clears the decrypted vault and key from memory but keeps you signed in. Logging out also ends your server session.</p>
+              <div class="panel-actions">
+                <button class="btn btn-secondary btn-sm" type="button" data-action="lock">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/icons.svg#i-lock"/></svg>Lock vault
+                </button>
+                <button class="btn btn-danger-ghost btn-sm" type="button" data-action="logout">
+                  <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/icons.svg#i-log-out"/></svg>Log out
+                </button>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

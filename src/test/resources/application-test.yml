@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${TEST_DB_URL:jdbc:postgresql://localhost:5432/vault_test}
+    username: ${TEST_DB_USERNAME:${DB_USERNAME:vault_app}}
+    password: ${TEST_DB_PASSWORD:${DB_PASSWORD:}}
+  flyway:
+    clean-disabled: false
+
+vault:
+  prelogin-secret: test-prelogin-secret-not-for-production
+  cookie-secure: false
+  login:
+    max-failures-per-account: 5
+    max-failures-per-ip: 50
+    window: 15m

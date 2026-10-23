@@ -1,0 +1,42 @@
+databases:
+  - name: vault-db
+    plan: free
+    databaseName: vault
+    user: vault_app
+
+services:
+  - type: web
+    name: vault
+    runtime: docker
+    plan: free
+    numInstances: 1
+    healthCheckPath: /
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: vault-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: vault-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: vault-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: vault-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: vault-db
+          property: password
+      - key: VAULT_PRELOGIN_SECRET
+        generateValue: true
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: FORWARD_HEADERS_STRATEGY
+        value: native
+      - key: SESSION_TIMEOUT
+        value: 30m

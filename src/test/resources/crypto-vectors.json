@@ -1,0 +1,29 @@
+{
+  "password": "Café horse battery staple ☕ 42",
+  "kdfSalt": "GkPiYFduuSMVZyBZVjoJqg==",
+  "kdfIterations": 600000,
+  "authHash": "qXikPxP5SXl0jR9xSde2cItaXnsSG58H1Y6oVcjr238=",
+  "protectedVaultKey": "v1.oMkXd3CM4pMT7tj9.vcLzaKMiZpg1H5FcsC5/fWli/5luvZbz/ZyPjHWCbILF06Z0Vr1cXR3mC+iEIrJG",
+  "fields": {
+    "name": {
+      "plaintext": "Example Mail",
+      "ciphertext": "v1.WdBtraEUMX07xIBT.fDv/qEoG83uJhFmtcQVmIopIOwPVDUwfCUVvRQ=="
+    },
+    "url": {
+      "plaintext": "https://mail.example.com/login",
+      "ciphertext": "v1.1SYrzBNTAITTHg+a.1YQ4BBf4A+YIW+6HWcPLXgpowySBoHe+l6zj2ABmnm4/VMSolk4dPV7SOV3RDg=="
+    },
+    "username": {
+      "plaintext": "alex@example.com",
+      "ciphertext": "v1.UGHxrrk5JmM5jR2Q.E5t2r9ab/o/XDjIUkRuKeTNgHetfoZ06xYZgNDUfErw="
+    },
+    "password": {
+      "plaintext": "S3cure-Pa55wörd!",
+      "ciphertext": "v1.fNPh9eQA57vmIo7Y.VkViVtgoysTFQ/EawLGLsVp043gHYYGPZClHMwI2prnw"
+    },
+    "notes": {
+      "plaintext": "Recovery codes are stored offline.\nLine two ✓",
+      "ciphertext": "v1.UOt3nrOIRDwx0pUv.PAIImuO26kq5w/TtxmfBejFPJ/uXEdGklf7RuvG7v6uXgHIVJEat9Y0Kf/2781HMi4rxaqe5qa2/zSKmCrl6"
+    }
+  }
+}

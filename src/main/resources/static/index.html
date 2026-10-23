@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VAULT — Client-side encrypted password manager</title>
+  <meta name="description" content="VAULT encrypts your passwords in your browser with AES-256-GCM before they ever reach the server.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/landing.css">
+</head>
+<body class="landing">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="/" aria-label="VAULT home">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock-keyhole"/></svg></span>
+        VAULT
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#security">Security</a>
+      </nav>
+      <div class="site-header-actions">
+        <a class="btn btn-ghost" href="/login.html">Log in</a>
+        <a class="btn btn-primary" href="/register.html">Sign up</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow"><svg class="icon icon-sm" aria-hidden="true"><use href="/assets/icons.svg#i-shield-check"/></svg> Encrypted in your browser</span>
+          <h1>Your passwords, sealed before they leave your device.</h1>
+          <p class="lead">VAULT encrypts every saved login in your browser with AES-256-GCM. Our server stores only ciphertext, and it never receives your master password.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="/register.html">Create your vault <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-arrow-right"/></svg></a>
+            <a class="btn btn-secondary btn-lg" href="/login.html">Log in</a>
+          </div>
+          <ul class="hero-facts" aria-label="Cryptography used">
+            <li>AES-256-GCM</li>
+            <li>PBKDF2-SHA256 · 600k</li>
+            <li>Argon2id</li>
+          </ul>
+        </div>
+
+        <figure class="hero-visual" aria-label="Illustration: what your browser sees compared with what the server stores">
+          <div class="flow-card">
+            <div class="flow-head">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-laptop"/></svg>
+              <span>In your browser</span>
+              <span class="badge badge-success">Decrypted</span>
+            </div>
+            <dl class="flow-fields">
+              <div><dt>Service</dt><dd>Example Mail</dd></div>
+              <div><dt>Username</dt><dd>alex@example.com</dd></div>
+              <div><dt>Password</dt><dd class="mono">••••••••••••••</dd></div>
+            </dl>
+          </div>
+          <div class="flow-arrow" aria-hidden="true">
+            <span>AES-256-GCM</span>
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock"/></svg>
+          </div>
+          <div class="flow-card flow-card-server">
+            <div class="flow-head">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-server"/></svg>
+              <span>On the server</span>
+              <span class="badge badge-accent">Ciphertext only</span>
+            </div>
+            <code class="cipher">v1.q8Zt3mWc1RkLpA0x.Hn4vQe9Kz2…</code>
+            <code class="cipher">v1.Jd7rXb2LmN5sTq8y.Rf0wPc3Gh6…</code>
+            <code class="cipher">v1.Ua1kVo9EiZ4yBn7m.Ls5tMx8Dq2…</code>
+          </div>
+          <figcaption class="sr-only">Illustrative example only. Not real account data.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <header class="section-header">
+          <h2>Everything a password manager should do, and nothing it shouldn't</h2>
+          <p>A focused vault with the tools you actually use every day.</p>
+        </header>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-icon"><svg class="icon icon-lg" aria-hidden="true"><use href="/assets/icons.svg#i-lock-keyhole"/></svg></span>
+            <h3>Client-side encryption</h3>
+            <p>Service names, URLs, usernames, passwords and notes are all encrypted in your browser before upload.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon"><svg class="icon icon-lg" aria-hidden="true"><use href="/assets/icons.svg#i-wand-sparkles"/></svg></span>
+            <h3>Secure generator</h3>
+            <p>Generate strong passwords with the Web Crypto API and unbiased random selection.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon"><svg class="icon icon-lg" aria-hidden="true"><use href="/assets/icons.svg#i-shield-alert"/></svg></span>
+            <h3>Security overview</h3>
+            <p>Spot weak, reused and long-unchanged passwords. The analysis runs locally in your browser.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon"><svg class="icon icon-lg" aria-hidden="true"><use href="/assets/icons.svg#i-search"/></svg></span>
+            <h3>Search &amp; favorites</h3>
+            <p>Find any login instantly, pin the ones you use most, and sort or filter your vault your way.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon"><svg class="icon icon-lg" aria-hidden="true"><use href="/assets/icons.svg#i-clock"/></svg></span>
+            <h3>Auto-lock</h3>
+            <p>Your vault key lives only in memory. VAULT locks itself after inactivity or when you reload.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon"><svg class="icon icon-lg" aria-hidden="true"><use href="/assets/icons.svg#i-monitor"/></svg></span>
+            <h3>Works everywhere</h3>
+            <p>A responsive interface for desktop, tablet and phone, with full keyboard navigation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section section-alt">
+      <div class="container">
+        <header class="section-header">
+          <h2>How it works</h2>
+          <p>Three steps, and your plaintext never touches our database.</p>
+        </header>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-number">1</span>
+            <h3>Choose a master password</h3>
+            <p>Your browser stretches it with PBKDF2 (600,000 iterations) and splits the result into a login key and an encryption key.</p>
+          </li>
+          <li class="step">
+            <span class="step-number">2</span>
+            <h3>Save your logins</h3>
+            <p>Each field is encrypted with a random 256-bit vault key and a fresh 96-bit nonce using AES-256-GCM.</p>
+          </li>
+          <li class="step">
+            <span class="step-number">3</span>
+            <h3>Unlock anywhere</h3>
+            <p>Log in from any browser. The server returns ciphertext, and your browser decrypts it locally.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="security" class="section">
+      <div class="container security-grid">
+        <div>
+          <h2>Security you can explain</h2>
+          <p class="lead">Every safeguard below is implemented in this application and described in the project documentation.</p>
+          <div class="alert alert-warning security-note">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-triangle-alert"/></svg>
+            <span>Your master password cannot be recovered. If you forget it, the encrypted data in your vault cannot be decrypted by anyone, including us.</span>
+          </div>
+        </div>
+        <ul class="security-list">
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-check"/></svg><span><strong>Separate keys.</strong> HKDF derives independent authentication and encryption keys from your master key.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-check"/></svg><span><strong>Hashed again on the server.</strong> The authentication key is stored only as an Argon2id hash.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-check"/></svg><span><strong>Authenticated encryption.</strong> AES-GCM detects any change to stored ciphertext.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-check"/></svg><span><strong>Hardened sessions.</strong> HttpOnly, SameSite=Strict cookies with CSRF protection and login throttling.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-check"/></svg><span><strong>Strict content policy.</strong> No third-party scripts, fonts or trackers are loaded.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-check"/></svg><span><strong>Ownership enforced.</strong> Every request is scoped to the signed-in account on the server.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <h2>Start with a fresh, encrypted vault.</h2>
+            <p>Free, open, and documented for review.</p>
+          </div>
+          <a class="btn btn-primary btn-lg" href="/register.html">Create your vault</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer-inner">
+      <a class="brand" href="/" aria-label="VAULT home">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#i-lock-keyhole"/></svg></span>
+        VAULT
+      </a>
+      <p>VAULT 2.0 · A student project. It has not been independently audited.</p>
+      <nav aria-label="Footer">
+        <a href="/login.html">Log in</a>
+        <a href="/register.html">Sign up</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,118 @@
+.auth-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) 1.1fr;
+  min-height: 100vh;
+}
+
+.auth-aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-10);
+  padding: var(--space-10);
+  overflow: hidden;
+  background: linear-gradient(160deg, #0d1a33 0%, #0a1222 60%, #120f2e 100%);
+  border-right: 1px solid var(--color-border);
+}
+
+.auth-aside::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -30% auto;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.25), transparent 65%);
+  pointer-events: none;
+}
+
+.auth-aside h2 {
+  font-size: var(--text-2xl);
+  max-width: 18ch;
+}
+
+.auth-aside p {
+  margin-top: var(--space-4);
+  max-width: 40ch;
+  color: var(--color-text-muted);
+}
+
+.auth-points {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.auth-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.auth-points .icon {
+  color: var(--color-cyan);
+  margin-top: 2px;
+}
+
+.auth-main {
+  display: grid;
+  place-items: center;
+  padding: var(--space-10) var(--space-6);
+}
+
+.auth-card {
+  width: min(440px, 100%);
+  display: grid;
+  gap: var(--space-6);
+}
+
+.auth-card-header h1 {
+  font-size: var(--text-xl);
+}
+
+.auth-card-header p {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.auth-mobile-brand {
+  display: none;
+}
+
+.auth-progress {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-aside {
+    display: none;
+  }
+
+  .auth-mobile-brand {
+    display: inline-flex;
+    margin-bottom: var(--space-2);
+  }
+
+  .auth-main {
+    place-items: start center;
+    padding-top: var(--space-12);
+  }
+}
